@@ -93,8 +93,8 @@ function App() {
 
       {!isLoading && !error && policies.length > 0 && (
         <div className="grid grid-cols-3 gap-4 md:grid-cols-4 mb-4">
-          <div className="col-span-3 mx-4 md:col-span-2 md:col-start-2">
-            <div className="mt-10 mb-4 flex items-end justify-between gap-4">
+          <div className="mt-10 mb-4 col-span-3 mx-4 md:col-span-2 md:col-start-2">
+            <div className="flex mb-4 items-end justify-between gap-4">
               {showPagination ? (
                 <Pagination
                   currentPage={currentPage}
@@ -109,7 +109,7 @@ function App() {
               <button
                 type="button"
                 onClick={() => setIsFilterOpen(!isFilterOpen)}
-                className="rounded-xs border border-slate-300 px-4 py-2 cursor-pointer text-xs"
+                className="rounded-xs border border-slate-700 px-4 py-2 cursor-pointer text-xs"
               >
                 Filtrera
               </button>
