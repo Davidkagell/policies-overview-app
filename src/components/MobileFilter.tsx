@@ -14,10 +14,8 @@ export function MobileFilter({
     policies,
   );
 
+  //Background not scrollable
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 767px)");
-    if (!media.matches) return;
-
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
