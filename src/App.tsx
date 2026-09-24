@@ -6,6 +6,7 @@ import { MobileFilter } from "./components/MobileFilter";
 import { DesktopFilter } from "./components/DesktopFilter";
 import { useFilters } from "./hooks/useFilters";
 import type { Filters } from "./hooks/useFilters";
+import { useMediaQuery } from "./hooks/useMediaQuery";
 
 function App() {
   const [policies, setPolicies] = useState<Policy[]>([]);
@@ -13,6 +14,7 @@ function App() {
   const [error, setError] = useState<string | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const { filters, setFilters, filteredPolicies } = useFilters(policies);
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     let cancelled = false;
@@ -68,7 +70,7 @@ function App() {
     <>
       <h1 className="text-3xl mt-4 font-bold text-center">Mina försäkringar</h1>
 
-      {isLoading && <p>Laddar försäkringar...</p>}
+      {isLoading && <p className="text-center mt-4">Laddar försäkringar...</p>}
       {error && <p>{error}</p>}
       {!isLoading && !error && policies.length === 0 && (
         <p>Inga försäkringar hittades.</p>
@@ -94,14 +96,14 @@ function App() {
             )}
           </div>
 
-          {isFilterOpen && (
-            <>
+          {isFilterOpen &&
+            (isMobile ? (
               <MobileFilter {...filterProps} />
-              <div className="hidden md:col-start-4 md:mr-4 md:block">
+            ) : (
+              <div className="col-start-4 mr-4">
                 <DesktopFilter {...filterProps} />
               </div>
-            </>
-          )}
+            ))}
         </div>
       )}
     </>
