@@ -6,19 +6,14 @@
 
 #root {
   font-family: var(--helvetica);
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
+  /*! comment this descructive styling */
+  /* width: 1126px; */
+  /* width: 100%;
+  margin: 0 auto; */
+  /* text-align: center; */
   min-height: 100svh;
 }
 
 body {
   margin: 0;
-}
-
-h1,
-h2 {
-  font-size: 3.5rem;
-  font-weight: 400;
 }
