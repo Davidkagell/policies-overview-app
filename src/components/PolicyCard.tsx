@@ -12,12 +12,12 @@ export function PolicyCard({
   const container = "p-2 flex flex-col items-start";
 
   return (
-    <section className=" mx-4 flex flex-col border-2 border-blue-200 rounded-xl overflow-hidden">
+    <section className=" flex flex-col border-2 border-blue-100 rounded-md overflow-hidden">
       <div
-        className={`flex flex-col bg-blue-100 ${container} px-0! border-b border-b-blue-200`}
+        className={`flex flex-col bg-blue-50 ${container} px-0! border-b border-b-blue-100`}
       >
         {policyStatus === "Inactive" && (
-          <p className="bg-red-100 text-red-800 rounded-full m-2 px-2 border border-red-500">
+          <p className="bg-red-100 text-red-800 rounded-full m-1.5 px-2 py-1  text-xs border border-blue-200">
             Din försäkring har avslutats
           </p>
         )}
@@ -27,7 +27,7 @@ export function PolicyCard({
         </ul>
       </div>
       <ul
-        className={`${container} w-full gap-0 divide-y divide-blue-200 items-stretch`}
+        className={`${container} w-full gap-0 divide-y divide-blue-100 items-stretch`}
       >
         <li className="grid w-full grid-cols-2 items-center py-1 truncate">
           <p className="font-bold text-left truncate">Startdatum:</p>
