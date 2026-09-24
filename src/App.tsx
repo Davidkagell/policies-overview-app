@@ -82,9 +82,13 @@ function App() {
       <h1 className="text-3xl mt-4 font-bold text-center">Mina försäkringar</h1>
 
       {isLoading && <p className="text-center mt-4">Laddar försäkringar...</p>}
-      {error && <p>{error}</p>}
+      {error && (
+        <p role="alert" className="text-center mt-10 text-red-600 font-bold">
+          Vi misslyckades med att hämta dina försäkringar
+        </p>
+      )}
       {!isLoading && !error && policies.length === 0 && (
-        <p>Inga försäkringar hittades.</p>
+        <p className="text-center mt-10">Inga försäkringar hittades...</p>
       )}
 
       {!isLoading && !error && policies.length > 0 && (
