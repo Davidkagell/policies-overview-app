@@ -8,50 +8,23 @@ import { Pagination } from "./components/Pagination";
 import { useFilters } from "./hooks/useFilters";
 import type { Filters } from "./hooks/useFilters";
 import { useMediaQuery } from "./hooks/useMediaQuery";
-import { useUrlParams } from "./hooks/useUrlParams";
+import { usePagination } from "./hooks/usePagination";
 
-const ITEMS_PER_PAGE = 5;
-
-function readPage(params: URLSearchParams) {
-  const raw = Number(params.get("sida"));
-  return Number.isInteger(raw) && raw > 0 ? raw : 1;
-}
-
-function writePage(params: URLSearchParams, page: number) {
-  params.delete("sida");
-  if (page > 1) {
-    params.set("sida", String(page));
-  }
-}
+const POLICIES_PER_PAGE = 5;
 
 function App() {
   const [policies, setPolicies] = useState<Policy[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [pageFromUrl, setCurrentPage] = useUrlParams({
-    get: readPage,
-    set: writePage,
-  });
   const { filters, setFilters, filteredPolicies } = useFilters(policies);
   const isMobile = useMediaQuery("(max-width: 767px)");
-
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredPolicies.length / ITEMS_PER_PAGE),
-  );
-  const currentPage = Math.min(pageFromUrl, totalPages);
-  const showPagination = filteredPolicies.length > ITEMS_PER_PAGE;
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const visiblePolicies = showPagination
-    ? filteredPolicies.slice(startIndex, startIndex + ITEMS_PER_PAGE)
-    : filteredPolicies;
-
-  useEffect(() => {
-    if (pageFromUrl > totalPages) {
-      setCurrentPage(totalPages);
-    }
-  }, [pageFromUrl, totalPages, setCurrentPage]);
+  const {
+    currentPage,
+    setCurrentPage,
+    visibleItems: visiblePolicies,
+    showPagination,
+  } = usePagination(filteredPolicies, POLICIES_PER_PAGE);
 
   useEffect(() => {
     let cancelled = false;
@@ -122,7 +95,7 @@ function App() {
                 <Pagination
                   currentPage={currentPage}
                   totalItems={filteredPolicies.length}
-                  itemsPerPage={ITEMS_PER_PAGE}
+                  itemsPerPage={POLICIES_PER_PAGE}
                   onPageChange={setCurrentPage}
                 />
               ) : (
