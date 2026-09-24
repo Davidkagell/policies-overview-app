@@ -26,7 +26,7 @@ export function MobileFilter({
 
   return (
     <div
-      className="fixed inset-0 z-50 md:hidden"
+      className="fixed inset-0 z-50"
       role="dialog"
       aria-modal="true"
       aria-label="Filter"
